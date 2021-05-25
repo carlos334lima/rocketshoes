@@ -1,7 +1,12 @@
-import { createStore } from 'redux'
+import { createStore } from "redux";
 
-import rootReducer from './modules/root'
+import rootReducer from "./modules/root";
 
-const store = createStore(rootReducer);
+//redux and reactotron integration
+const enhancer =
+  process.env.NODE_ENV === "development" ? console.tron.createEnhancer() : null;
 
-export default store
+
+const store = createStore(rootReducer, enhancer);
+
+export default store;

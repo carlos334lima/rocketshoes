@@ -54,12 +54,6 @@ function Home(props) {
   );
 }
 
-/* const mapStateToprops = (state) => {
-  return {
-    state.
-  } 
-} */
-
 
 
 export default connect()(Home);

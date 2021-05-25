@@ -12,8 +12,9 @@ import {
 import { formatPrice } from "../../util/format";
 import { Container, ProductTable, Total, EmptyCart } from "./style";
 
-function Cart({ product, dispatch }) {
+import { removeToCart } from "../../store/modules/cart/actions";
 
+function Cart({ product, dispatch }) {
   return (
     <Container>
       {product.length >= 1 ? (
@@ -42,7 +43,7 @@ function Cart({ product, dispatch }) {
                     <button>
                       <MdRemoveCircleOutline size={20} color="#7159c1" />
                     </button>
-                    <input type="number" readOnly value={product.amount}/>
+                    <input type="number" readOnly value={product.amount} />
                     <button onClick={() => {}}>
                       <MdAddCircleOutline size={20} color="#7159c1" />
                     </button>
@@ -51,7 +52,7 @@ function Cart({ product, dispatch }) {
                     <strong>R$ 258,80</strong>
                   </td>
                   <td>
-                    <button onClick={() => dispatch({ type: 'REMOVE_CART', id: product.id})}>
+                    <button onClick={() => dispatch(removeToCart(product.id))}>
                       <MdDelete size={20} color="#7159c1" />
                     </button>
                   </td>

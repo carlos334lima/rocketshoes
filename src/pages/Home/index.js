@@ -7,6 +7,7 @@ import { formatPrice } from "../../util/format";
 
 import api from "../../services/api";
 
+import { addToCart } from "../../store/modules/cart/actions";
 
 import { ProductList, Loading } from "./style";
 
@@ -19,24 +20,17 @@ function Home(props) {
     });
   }, []);
 
-  const {dispatch} = props;
+  const { dispatch } = props;
 
-  function handleAddProduct(product){
-
-     dispatch({
-      type: 'ADD_TO_CART',
-      product
-    })
+  function handleAddProduct(product) {
+    dispatch(addToCart(product));
   }
 
   return (
     <ProductList>
       {sneakers.map((product) => (
         <li key={product.id}>
-          <img
-            src={product.image}
-            alt=""
-          />
+          <img src={product.image} alt="" />
 
           <strong>{product.title}</strong>
           <span>{formatPrice(product.price)}</span>
@@ -53,7 +47,5 @@ function Home(props) {
     </ProductList>
   );
 }
-
-
 
 export default connect()(Home);

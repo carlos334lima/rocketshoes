@@ -12,10 +12,11 @@ import {
 import { formatPrice } from "../../util/format";
 import { Container, ProductTable, Total, EmptyCart } from "./style";
 
-function Cart({ product }) {
+function Cart({ product, dispatch }) {
+
   return (
     <Container>
-      {product.lenght >= 1 ? (
+      {product.length >= 1 ? (
         <>
           <ProductTable>
             <thead>
@@ -41,8 +42,8 @@ function Cart({ product }) {
                     <button>
                       <MdRemoveCircleOutline size={20} color="#7159c1" />
                     </button>
-                    <input type="number" readOnly />
-                    <button>
+                    <input type="number" readOnly value={product.amount}/>
+                    <button onClick={() => {}}>
                       <MdAddCircleOutline size={20} color="#7159c1" />
                     </button>
                   </td>
@@ -50,7 +51,7 @@ function Cart({ product }) {
                     <strong>R$ 258,80</strong>
                   </td>
                   <td>
-                    <button>
+                    <button onClick={() => dispatch({ type: 'REMOVE_CART', id: product.id})}>
                       <MdDelete size={20} color="#7159c1" />
                     </button>
                   </td>

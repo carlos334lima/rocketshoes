@@ -25,7 +25,7 @@ function Home(props) {
 
      dispatch({
       type: 'ADD_TO_CART',
-      payload: product
+      product
     })
   }
 

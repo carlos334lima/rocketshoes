@@ -1,19 +1,44 @@
 import api from "../../../services/api";
-import { all, call, put, takeLatest } from 'redux-saga/effects'
-import { addToCartSuccess } from './actions'
+import { formatPrice } from "../../../util/format";
+import { all, call, put, takeLatest, select } from "redux-saga/effects";
+import { addToCartSuccess, updateAmount } from "./actions";
 
 //yield=> await
 //call executa funções que retorna uma promise
 //put => dispara uma ação
 //takelatest => ouve uma action
+//select => acessar informação dentro do saga
 
-function* addToCart({id}){
+function* addToCart({ id }) {
+  const productExists = yield select((state) =>
+    state.cart.find((p) => p.id === id)
+  );
 
-  const response = yield call(api.get, `/products/${id}`)
+  const stock = yield call(api.get, `/stock/${id}`);
 
-  yield put(addToCartSuccess(response.data))
-} 
+  const stockAmount = stock.data.amount;
+  const currentAmount = productExists ? productExists.amount : 0;
+  const amount = currentAmount + 1;
 
-export default all([
-  takeLatest('@cart/ADD_REQUEST', addToCart)
-])
+  if (amount > stockAmount) {
+    console.tron.warn('ERRO')
+    return;
+  }
+
+  if (productExists) {
+
+    yield put(updateAmount(id, amount));
+  } else {
+    const response = yield call(api.get, `/products/${id}`);
+
+    const data = {
+      ...response.data,
+      amount: 1,
+      priceFormatted: formatPrice(response.data.price),
+    };
+
+    yield put(addToCartSuccess(data));
+  }
+}
+
+export default all([takeLatest("@cart/ADD_REQUEST", addToCart)]);

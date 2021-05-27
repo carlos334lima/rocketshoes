@@ -7,7 +7,7 @@ import { formatPrice } from "../../util/format";
 
 import api from "../../services/api";
 
-import { addToCart } from "../../store/modules/cart/actions";
+import { addToCartRequest } from "../../store/modules/cart/actions";
 
 import { ProductList, Loading } from "./style";
 
@@ -23,7 +23,7 @@ function Home(props) {
   const { dispatch } = props;
 
   function handleAddProduct(product) {
-    dispatch(addToCart(product));
+    dispatch(addToCartRequest(product.id));
   }
 
   return (

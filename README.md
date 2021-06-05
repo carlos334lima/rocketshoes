@@ -55,7 +55,7 @@ This project is under the MIT license. See the [LICENSE](https://github.com/luke
 
 ---
 
-Made with ♥ by Carlos Lima :wave: [Get in touch!](https://www.linkedin.com/in/lukemorales/)
+Made with ♥ by Carlos Lima :wave: [Get in touch!](https://www.linkedin.com/in/carlos-henrique-lima-60a7ba1a3/)
 
 [nodejs]: https://nodejs.org/
 [yarn]: https://yarnpkg.com/
